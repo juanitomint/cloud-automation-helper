@@ -16,4 +16,4 @@ docker build $1 $2 \
         --build-arg GIT_USER="$GIT_USER" \
         --build-arg GIT_USER_EMAIL="$GIT_USER_EMAIL"  \
         --add-host=plcldbeesapp3:10.75.176.201 \
-        -t $REGISTRY/$REPOSITORY:$VERSION . || exit 1
+        -t $DOCKER_IMAGENAME:$VERSION . || exit 1

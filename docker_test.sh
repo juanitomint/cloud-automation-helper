@@ -3,4 +3,4 @@
 source ./automation/docker_getenv.sh
 
 
-docker run -it -p 3000:3000 --rm $REGISTRY/$REPOSITORY:$VERSION $1
+docker run -it -p 3000:3000 --rm $DOCKER_IMAGENAME:$VERSION $1
