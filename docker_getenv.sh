@@ -3,12 +3,7 @@
 source ./automation/printTable.sh
 
 DOCKER_TAG_PROTECTION=true
-# check version
-if [ -z "$VERSION" ]
-      then
-      VERSION=`jq -r '.version' ./package.json`
-      
-fi
+
 
 if [ -z "$NAMESPACE" ]; then
     git_url=$(git config --get remote.origin.url)
@@ -37,6 +32,24 @@ else
   BRANCH_NAME=$GIT_BRANCH
 fi
 
+# 1 try to get version from package json
+if [[ ( ! -z "$VERSION" ) || ( -f "./package.json" ) ]]
+      then
+      VERSION=`jq -r '.version' ./package.json`
+fi
+
+# 2 last tag 
+if [[ ( ! -z "$VERSION" )  || ( ! -z "$GIT_LAST_TAG" ) ]]
+      then
+      VERSION=$GIT_LAST_TAG
+fi
+
+
+# 3 use "latest"
+if [ -z "$VERSION" ]; then
+      VERSION="latest"
+fi
+
 # check repository
 if [ -z "$REPOSITORY" ]
 then
@@ -50,17 +63,16 @@ then
 
 fi
 # build DOCKER_IMAGENAME
-if [ -z "DOCKER_IMAGENAME" ]
+if [ -z "$DOCKER_IMAGENAME" ]
    then   
-      if [ -z "REGISTRY" ]
+      if [ ! -z "REGISTRY" ]
             then
-                  DOCKER_IMAGENAME=$REPOSITORY:$VERSION
+                  DOCKER_IMAGENAME=$REPOSITORY
             else
-                  DOCKER_IMAGENAME=$REGISTRY/$REPOSITORY:$VERSION
+                  DOCKER_IMAGENAME=$REGISTRY/$REPOSITORY
       fi
       
 fi
-
 
 # check git user
 if [ -z "$GITLAB_USER_LOGIN" ]
