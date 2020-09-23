@@ -1,0 +1,22 @@
+{
+  "name": "@devops/automation",
+  "version": "1.0.6",
+  "description": "Automation Srcipts",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "",
+    "bump": "npm version patch",
+    "test": "echo \"MOCK: running tests \" && exit 0"
+  },
+  "author": "Juan Ignacio Borda",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@bitbucket.personal.corp:7999/doc/automation.git"
+  }
+}

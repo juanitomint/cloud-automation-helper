@@ -1,0 +1,30 @@
+{
+    "environments":{
+        "master":{
+            
+            "target":"Production",
+            "skip_ci":true,
+            "Author":"Juan Ignacio Borda",
+            "TARGET_AWS_ACCOUNT":"XXXXXXXXXXXX",
+            "TARGET_AWS_ROLE" :"cloudbees-deploy-role",
+            "TARGET_REGION" :"us-east-1"
+        },
+        "test":{
+            "target":"Development",
+            "skip_ci":false,
+            "Author":"Juan Ignacio Borda",
+            "TARGET_AWS_ACCOUNT":"XXXXXXXXXXXX",
+            "TARGET_AWS_ROLE" :"cloudbees-deploy-role",
+            "TARGET_REGION" :"us-east-1"
+        },
+        "develop":{
+            "target":"Development",
+            "skip_ci":false,
+            "Author":"Juan Ignacio Borda",
+            "TARGET_AWS_ACCOUNT":"XXXXXXXXXXXX",
+            "TARGET_AWS_ROLE" :"cloudbees-deploy-role",
+            "TARGET_REGION" :"us-east-1"
+        }
+
+    }
+}
