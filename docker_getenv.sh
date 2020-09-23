@@ -13,7 +13,12 @@ fi
 if [ -z "$NAMESPACE" ]; then
     git_url=$(git config --get remote.origin.url)
     paths=(${git_url//// })
+    
     NAMESPACE=${paths[-2],,}
+      if [[ $NAMESPACE == *":"* ]]; then
+            paths=(${NAMESPACE/:/ })
+            NAMESPACE=${paths[-1],,}
+      fi
 fi
 
 #get reponame
@@ -44,6 +49,18 @@ then
       REGISTRY=""
 
 fi
+# build DOCKER_IMAGENAME
+if [ -z "DOCKER_IMAGENAME" ]
+   then   
+      if [ -z "REGISTRY" ]
+            then
+                  DOCKER_IMAGENAME=$REPOSITORY:$VERSION
+            else
+                  DOCKER_IMAGENAME=$REGISTRY/$REPOSITORY:$VERSION
+      fi
+      
+fi
+
 
 # check git user
 if [ -z "$GITLAB_USER_LOGIN" ]
@@ -71,7 +88,7 @@ REGISTRY,$REGISTRY
 NAMESPACE,$NAMESPACE 
 VERSION,$VERSION 
 REPOSITORY,$REPOSITORY 
-DOCKER_IMAGENAME,$REGISTRY/$REPOSITORY:$VERSION
+DOCKER_IMAGENAME,$DOCKER_IMAGENAME
 DOCKER_TAG_PROTECTION,$DOCKER_TAG_PROTECTION
 GIT_USER,$GIT_USER 
 GIT_USER_EMAIL,$GIT_USER_EMAIL 
