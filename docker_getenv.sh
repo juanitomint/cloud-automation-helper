@@ -39,7 +39,7 @@ if [[ ( ! -z "$VERSION" ) || ( -f "./package.json" ) ]]
 fi
 
 # 2 last tag 
-if [[ ( ! -z "$VERSION" )  || ( ! -z "$GIT_LAST_TAG" ) ]]
+if [[ ( ! -z "$VERSION" )  || ( -z "$GIT_LAST_TAG" ) ]]
       then
       VERSION=$GIT_LAST_TAG
 fi
